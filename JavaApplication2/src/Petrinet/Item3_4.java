@@ -4,6 +4,7 @@
  */
 package Petrinet;
 
+import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 
 /**
@@ -499,12 +500,29 @@ public class Item3_4 extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        wait=Integer.parseInt(wait_text.getText());
-        free=Integer.parseInt(free_text.getText());
-        inside=Integer.parseInt(inside_text.getText());
-        busy=Integer.parseInt(busy_text.getText());
-        done=Integer.parseInt(done_text.getText());
-        docu=Integer.parseInt(docu_text.getText());
+        if (!(wait_text.getText().equals("")) && (Integer.parseInt(wait_text.getText())>10))
+        {
+            JOptionPane.showMessageDialog(this,"The number of token in wait is not greater than 10","Warning",JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        if(busy_text.getText().equals("")) busy = 0;
+        else busy = Integer.parseInt(busy_text.getText());
+
+        if(free_text.getText().equals("")) free = 0;
+        else free = Integer.parseInt(free_text.getText());
+        
+        if(docu_text.getText().equals("")) docu = 0;
+        else docu = Integer.parseInt(docu_text.getText()); 
+        
+        if(wait_text.getText().equals("")) wait = 0;
+        else wait = Integer.parseInt(wait_text.getText());
+        
+        if(inside_text.getText().equals("")) inside = 0;
+        else inside = Integer.parseInt(inside_text.getText());
+
+        if(done_text.getText().equals("")) done = 0;
+        else done = Integer.parseInt(done_text.getText());
+        
         Place1.setText(String.valueOf(wait));
         Place2.setText(String.valueOf(free));
         Place3.setText(String.valueOf(inside));

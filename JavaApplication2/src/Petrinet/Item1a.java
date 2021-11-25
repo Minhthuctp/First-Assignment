@@ -54,11 +54,11 @@ public class Item1a extends JFrame {
         tt6 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        text1 = new javax.swing.JTextField();
+        free_text = new javax.swing.JTextField();
         Name1 = new javax.swing.JLabel();
-        text2 = new javax.swing.JTextField();
+        busy_text = new javax.swing.JTextField();
         Name2 = new javax.swing.JLabel();
-        text3 = new javax.swing.JTextField();
+        docu_text = new javax.swing.JTextField();
         Name3 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         text4 = new javax.swing.JTextField();
@@ -230,25 +230,40 @@ public class Item1a extends JFrame {
         getContentPane().add(jButton2);
         jButton2.setBounds(160, 360, 90, 23);
 
-        text1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        getContentPane().add(text1);
-        text1.setBounds(90, 320, 60, 20);
+        free_text.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        free_text.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                free_textKeyTyped(evt);
+            }
+        });
+        getContentPane().add(free_text);
+        free_text.setBounds(90, 320, 60, 20);
 
         Name1.setText("Free");
         getContentPane().add(Name1);
         Name1.setBounds(60, 320, 40, 20);
 
-        text2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        getContentPane().add(text2);
-        text2.setBounds(240, 320, 60, 20);
+        busy_text.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        busy_text.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                busy_textKeyTyped(evt);
+            }
+        });
+        getContentPane().add(busy_text);
+        busy_text.setBounds(240, 320, 60, 20);
 
         Name2.setText("Busy");
         getContentPane().add(Name2);
         Name2.setBounds(210, 320, 40, 20);
 
-        text3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        getContentPane().add(text3);
-        text3.setBounds(390, 320, 60, 20);
+        docu_text.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        docu_text.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                docu_textKeyTyped(evt);
+            }
+        });
+        getContentPane().add(docu_text);
+        docu_text.setBounds(390, 320, 60, 20);
 
         Name3.setText("Docu");
         getContentPane().add(Name3);
@@ -307,12 +322,19 @@ public class Item1a extends JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        free=Integer.parseInt(text1.getText());
-        busy=Integer.parseInt(text2.getText());
-        docu=Integer.parseInt(text3.getText());
+        if(busy_text.getText().equals("")) busy = 0;
+        else busy = Integer.parseInt(busy_text.getText());
+
+        if(free_text.getText().equals("")) free = 0;
+        else free = Integer.parseInt(free_text.getText());
+        
+        if(docu_text.getText().equals("")) docu = 0;
+        else docu = Integer.parseInt(docu_text.getText());
+        
         Place1.setText(String.valueOf(free));
         Place2.setText(String.valueOf(busy));
         Place3.setText(String.valueOf(docu));
+        
         text4.setText("");
         String s = "[" + String.valueOf(free) + ".free,"+ String.valueOf(busy) + ".busy,"+ String.valueOf(docu) + ".docu]";
         text5.setText(s);
@@ -376,6 +398,30 @@ public class Item1a extends JFrame {
         String s = "[" + String.valueOf(free) + ".free,"+ String.valueOf(busy) + ".busy,"+ String.valueOf(docu) + ".docu]";
         text5.setText(s);
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void free_textKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_free_textKeyTyped
+        // TODO add your handling code here:
+        if (!Character.isDigit(evt.getKeyChar()))
+        {
+            evt.consume();
+        }
+    }//GEN-LAST:event_free_textKeyTyped
+
+    private void busy_textKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_busy_textKeyTyped
+        // TODO add your handling code here:
+        if (!Character.isDigit(evt.getKeyChar()))
+        {
+            evt.consume();
+        }
+    }//GEN-LAST:event_busy_textKeyTyped
+
+    private void docu_textKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_docu_textKeyTyped
+        // TODO add your handling code here:
+        if (!Character.isDigit(evt.getKeyChar()))
+        {
+            evt.consume();
+        }
+    }//GEN-LAST:event_docu_textKeyTyped
 
     private class Auto extends SwingWorker<Void, String>
     {
@@ -453,13 +499,13 @@ public class Item1a extends JFrame {
     private javax.swing.JLabel Place2;
     private javax.swing.JLabel Place3;
     private javax.swing.JLabel Start;
+    private javax.swing.JTextField busy_text;
+    private javax.swing.JTextField docu_text;
+    private javax.swing.JTextField free_text;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JTextField text1;
-    private javax.swing.JTextField text2;
-    private javax.swing.JTextField text3;
     private javax.swing.JTextField text4;
     private javax.swing.JTextField text5;
     private javax.swing.JLabel tt1;

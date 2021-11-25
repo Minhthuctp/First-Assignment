@@ -6,6 +6,7 @@ package Petrinet;
 
 import java.awt.Color;
 import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import javax.swing.border.Border;
 
@@ -42,12 +43,12 @@ public class Item2 extends javax.swing.JFrame {
 
         jLabel_transition1 = new javax.swing.JLabel();
         jLabel_transition = new javax.swing.JLabel();
-        text1 = new javax.swing.JTextField();
+        wait_text = new javax.swing.JTextField();
         Name1 = new javax.swing.JLabel();
-        text2 = new javax.swing.JTextField();
+        inside_text = new javax.swing.JTextField();
         Name2 = new javax.swing.JLabel();
         Name3 = new javax.swing.JLabel();
-        text3 = new javax.swing.JTextField();
+        done_text = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -110,22 +111,32 @@ public class Item2 extends javax.swing.JFrame {
         getContentPane().add(jLabel_transition);
         jLabel_transition.setBounds(189, 60, 61, 53);
 
-        text1.setFont(new java.awt.Font("Hack Nerd Font", 3, 14)); // NOI18N
-        text1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        text1.setText("0");
-        getContentPane().add(text1);
-        text1.setBounds(140, 200, 82, 25);
+        wait_text.setFont(new java.awt.Font("Hack Nerd Font", 3, 14)); // NOI18N
+        wait_text.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        wait_text.setText("0");
+        wait_text.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                wait_textKeyTyped(evt);
+            }
+        });
+        getContentPane().add(wait_text);
+        wait_text.setBounds(140, 200, 82, 25);
 
         Name1.setFont(new java.awt.Font("Hack Nerd Font", 3, 18)); // NOI18N
         Name1.setText("Wait");
         getContentPane().add(Name1);
         Name1.setBounds(100, 200, 38, 20);
 
-        text2.setFont(new java.awt.Font("Hack Nerd Font", 3, 14)); // NOI18N
-        text2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        text2.setText("0");
-        getContentPane().add(text2);
-        text2.setBounds(340, 200, 82, 25);
+        inside_text.setFont(new java.awt.Font("Hack Nerd Font", 3, 14)); // NOI18N
+        inside_text.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        inside_text.setText("0");
+        inside_text.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                inside_textKeyTyped(evt);
+            }
+        });
+        getContentPane().add(inside_text);
+        inside_text.setBounds(340, 200, 82, 25);
 
         Name2.setFont(new java.awt.Font("Hack Nerd Font", 3, 18)); // NOI18N
         Name2.setText("Inside");
@@ -137,16 +148,21 @@ public class Item2 extends javax.swing.JFrame {
         getContentPane().add(Name3);
         Name3.setBounds(500, 200, 45, 20);
 
-        text3.setFont(new java.awt.Font("Hack Nerd Font", 3, 14)); // NOI18N
-        text3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        text3.setText("0");
-        text3.addActionListener(new java.awt.event.ActionListener() {
+        done_text.setFont(new java.awt.Font("Hack Nerd Font", 3, 14)); // NOI18N
+        done_text.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        done_text.setText("0");
+        done_text.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                text3ActionPerformed(evt);
+                done_textActionPerformed(evt);
             }
         });
-        getContentPane().add(text3);
-        text3.setBounds(550, 200, 82, 25);
+        done_text.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                done_textKeyTyped(evt);
+            }
+        });
+        getContentPane().add(done_text);
+        done_text.setBounds(550, 200, 82, 25);
 
         jButton1.setFont(new java.awt.Font("Hack Nerd Font", 1, 18)); // NOI18N
         jButton1.setText("Set token");
@@ -388,17 +404,26 @@ public class Item2 extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel_transitionMouseExited
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
         if (t != null) {
             
             t.cancel(true);
             t = null;
             jButton1.setEnabled(true);
         }
+        if (!(wait_text.getText().equals("")) && (Integer.parseInt(wait_text.getText())>10))
+        {
+            JOptionPane.showMessageDialog(this,"The number of token in wait is not greater than 10","Warning",JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
         
-        wt = Integer.parseInt(text1.getText());
-        id = Integer.parseInt(text2.getText());
-        dn = Integer.parseInt(text3.getText());
+        if(wait_text.getText().equals("")) wt = 0;
+        else wt = Integer.parseInt(wait_text.getText());
+        
+        if(inside_text.getText().equals("")) id = 0;
+        else id = Integer.parseInt(inside_text.getText());
+
+        if(done_text.getText().equals("")) dn = 0;
+        else dn = Integer.parseInt(done_text.getText());
         
         if (wt >= 0 && id >= 0 && dn >= 0) {
             
@@ -445,9 +470,9 @@ public class Item2 extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
-    private void text3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_text3ActionPerformed
+    private void done_textActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_done_textActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_text3ActionPerformed
+    }//GEN-LAST:event_done_textActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         
@@ -456,9 +481,9 @@ public class Item2 extends javax.swing.JFrame {
         Done.setText("0");
         firing.setText("");
         Marking();
-        text1.setText("0");
-        text2.setText("0");
-        text3.setText("0");
+        wait_text.setText("0");
+        inside_text.setText("0");
+        done_text.setText("0");
         
         if (jToggleButton1.getText().equals("OFF")) {
                 
@@ -477,6 +502,30 @@ public class Item2 extends javax.swing.JFrame {
         jButton1.setEnabled(true);
         
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void wait_textKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_wait_textKeyTyped
+        // TODO add your handling code here:
+        if (!Character.isDigit(evt.getKeyChar()))
+        {
+            evt.consume();
+        }
+    }//GEN-LAST:event_wait_textKeyTyped
+
+    private void inside_textKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inside_textKeyTyped
+        // TODO add your handling code here:
+        if (!Character.isDigit(evt.getKeyChar()))
+        {
+            evt.consume();
+        }
+    }//GEN-LAST:event_inside_textKeyTyped
+
+    private void done_textKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_done_textKeyTyped
+        // TODO add your handling code here:
+        if (!Character.isDigit(evt.getKeyChar()))
+        {
+            evt.consume();
+        }
+    }//GEN-LAST:event_done_textKeyTyped
     
     public void Marking() {
         
@@ -576,7 +625,9 @@ public class Item2 extends javax.swing.JFrame {
     private javax.swing.JLabel Name2;
     private javax.swing.JLabel Name3;
     private javax.swing.JLabel Wait;
+    private javax.swing.JTextField done_text;
     private javax.swing.JTextField firing;
+    private javax.swing.JTextField inside_text;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel10;
@@ -598,9 +649,7 @@ public class Item2 extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JTextField marking;
-    private javax.swing.JTextField text1;
-    private javax.swing.JTextField text2;
-    private javax.swing.JTextField text3;
+    private javax.swing.JTextField wait_text;
     // End of variables declaration//GEN-END:variables
 
 }
