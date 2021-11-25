@@ -500,6 +500,13 @@ public class Item3_4 extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        if (t!=null)
+        {
+            t.cancel(true);
+            t=null;
+            jButton2.setEnabled(true);
+            jButton3.setEnabled(false);
+        }
         if (!(wait_text.getText().equals("")) && (Integer.parseInt(wait_text.getText())>10))
         {
             JOptionPane.showMessageDialog(this,"The number of token in wait is not greater than 10","Warning",JOptionPane.INFORMATION_MESSAGE);
@@ -560,6 +567,13 @@ public class Item3_4 extends javax.swing.JFrame {
         wait=0;
         inside=0;
         done=0;
+        if (t!=null)
+        {
+            t.cancel(true);
+            t=null;
+            jButton2.setEnabled(true);
+            jButton3.setEnabled(false);
+        }
         Place1.setText(String.valueOf(wait));
         Place4.setText(String.valueOf(busy));
         Place6.setText(String.valueOf(docu));

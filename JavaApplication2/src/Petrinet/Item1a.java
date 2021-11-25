@@ -322,6 +322,14 @@ public class Item1a extends JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        if (t!=null)
+        {
+            t.cancel(true);
+            t=null;
+            jButton2.setEnabled(true);
+            jButton3.setEnabled(false);
+        }
+        
         if(busy_text.getText().equals("")) busy = 0;
         else busy = Integer.parseInt(busy_text.getText());
 
@@ -391,6 +399,13 @@ public class Item1a extends JFrame {
         free=0;
         busy=0;
         docu=0;
+        if (t!=null)
+        {
+            t.cancel(true);
+            t=null;
+            jButton2.setEnabled(true);
+            jButton3.setEnabled(false);
+        }
         Place1.setText(String.valueOf(free));
         Place3.setText(String.valueOf(busy));
         Place2.setText(String.valueOf(docu));

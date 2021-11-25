@@ -4,6 +4,8 @@
  */
 package Petrinet;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Minh Thuc
@@ -233,16 +235,26 @@ public class Item1b extends javax.swing.JFrame {
         jButton1.setBounds(420, 280, 90, 23);
 
         text4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        text4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                text4ActionPerformed(evt);
+            }
+        });
         getContentPane().add(text4);
-        text4.setBounds(320, 320, 80, 20);
+        text4.setBounds(320, 320, 110, 20);
 
         Name4.setText("Number of transition relation ");
         getContentPane().add(Name4);
         Name4.setBounds(130, 320, 180, 20);
 
         text5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        text5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                text5ActionPerformed(evt);
+            }
+        });
         getContentPane().add(text5);
-        text5.setBounds(320, 350, 80, 20);
+        text5.setBounds(320, 350, 110, 20);
 
         Name5.setText("Number of reachable marking");
         getContentPane().add(Name5);
@@ -251,21 +263,30 @@ public class Item1b extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    static int factorial(int n)
+    static long factorial(int n)
     {
-        int res=1;
+        long res=1;
         for (int i=1;i<=n;i++)
             res*=i;
         return res;
     }
     
-    int Combination(int n,int k)
+    static long shortest(int a,int b)
     {
-        return factorial(n)/(factorial(n-k)*factorial(k));
+        long res=1;
+        for (int i=a;i<=b;i++)
+            res*=i;
+        return res;
+    }
+    
+    long Combination(int n,int k)
+    {
+        return shortest(n-k+1,n)/factorial(k);
     }
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        
         if(busy_text.getText().equals("")) busy = 0;
         else busy = Integer.parseInt(busy_text.getText());
 
@@ -275,6 +296,7 @@ public class Item1b extends javax.swing.JFrame {
         if(docu_text.getText().equals("")) docu = 0;
         else docu = Integer.parseInt(docu_text.getText());
         
+        
         free=Integer.parseInt(free_text.getText());
         busy=Integer.parseInt(busy_text.getText());
         docu=Integer.parseInt(docu_text.getText());
@@ -282,6 +304,11 @@ public class Item1b extends javax.swing.JFrame {
         Place2.setText(String.valueOf(busy));
         Place3.setText(String.valueOf(docu));
         int n=free+busy+docu;
+        //if (n>20)
+        //{
+        //    JOptionPane.showMessageDialog(this,"The number of total tokens is not greater than 20","Warning",JOptionPane.INFORMATION_MESSAGE);
+        //    return;
+        //}
         if (n==1)
         {
             text4.setText("3");
@@ -296,8 +323,8 @@ public class Item1b extends javax.swing.JFrame {
             }
             else
             {
-                int x=Combination(n+2,2);
-                int tt=(x-3*(n-1)-3)*3+6*(n-1)+3;
+                long x=Combination(n+2,2);
+                long tt=(x-3*(n-1)-3)*3+6*(n-1)+3;
                 text4.setText(String.valueOf(tt));
                 text5.setText(String.valueOf(x));
             }
@@ -327,6 +354,14 @@ public class Item1b extends javax.swing.JFrame {
             evt.consume();
         }
     }//GEN-LAST:event_docu_textKeyTyped
+
+    private void text4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_text4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_text4ActionPerformed
+
+    private void text5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_text5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_text5ActionPerformed
 
     /**
      * @param args the command line arguments
